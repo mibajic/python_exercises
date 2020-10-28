@@ -194,8 +194,13 @@ class PositionSearchProblem(search.SearchProblem):
 
         successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
+
             x,y = state
+            # print("x: " + str(x))
+            # print("y: " + str(y))
             dx, dy = Actions.directionToVector(action)
+            print("dx: " + str(dx))
+            print("dy: " + str(dy))
             nextx, nexty = int(x + dx), int(y + dy)
             if not self.walls[nextx][nexty]:
                 nextState = (nextx, nexty)
