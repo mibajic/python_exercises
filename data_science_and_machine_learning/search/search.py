@@ -90,26 +90,36 @@ def depthFirstSearch(problem):
 
     "*** YOUR CODE HERE ***"
     """
-
-    stack = []
+    # create an empty stack
+    stack = util.Stack()
+    # create an empty list where visited nodes will be stored
     visited_nodes = []
+    # create an empty list where full path to the goal state will be stored
     path = []
+    # obtain start state
     start_state = problem.getStartState()
-    stack.append((start_state, path))
+    # push start state to the empty stack
+    stack.push((start_state, path))
 
+    # the function runs while stack is empty
     while stack:
+        # remove state and path from the top of the stack
         state, path = stack.pop()
+        # obtain goal state
         goal_state = problem.isGoalState(state)
+        # when goal state is reached or start state is goal state, then the function returns full path to the goal state
         if goal_state is True or start_state == goal_state:
             return path
+        # if current node is not already visited, then program adds it to the list of visited nodes
         while state not in visited_nodes:
             visited_nodes.append(state)
+            # obtain child nodes from the current node
             child_nodes = problem.getSuccessors(state)
+            # for a node in child nodes, define it and add to the stack together with path how to get to it
             for next_node in child_nodes:
                 node, direction, number_of_steps = next_node
                 next_step = path + [direction]
-                stack.append((node, next_step))
-
+                stack.push((node, next_step))
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
