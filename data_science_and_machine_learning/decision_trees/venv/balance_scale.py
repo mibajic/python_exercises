@@ -5,6 +5,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
+
 def source_data():
     data = pd.read_csv(
         'https://archive.ics.uci.edu/ml/machine-learning-databases/'
@@ -60,6 +61,7 @@ def main():
 
     y_pred_gini = prediction(x_test, dt)
     calculation_accuracy(y_test, y_pred_gini)
+
 
 if __name__ == "__main__":
     main()
