@@ -2,3 +2,17 @@
 [1112/233036.861:ERROR:prune_crash_reports.cc(36)] PruneCrashReportDatabase: Failed to get pending reports
 [1115/153121.722:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [1115/153121.722:ERROR:exception_snapshot_win.cc(99)] thread ID 17516 not found in process
+[1115/173603.821:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1115/173603.821:ERROR:exception_snapshot_win.cc(99)] thread ID 8168 not found in process
+[1115/173604.246:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1115/173604.246:ERROR:exception_snapshot_win.cc(99)] thread ID 22284 not found in process
+[1115/184505.139:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\mbajic\AppData\Local\Temp\scoped_dir30212_1636271462\Crashpad\attachments\e745b81e-9c14-4cc9-836c-ea92354b1920: The system cannot find the path specified. (0x3)
+[1116/155418.150:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1116/155418.153:ERROR:exception_snapshot_win.cc(99)] thread ID 44616 not found in process
+[1116/160147.851:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1116/160147.851:ERROR:exception_snapshot_win.cc(99)] thread ID 53124 not found in process
+[1116/183943.220:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1116/183943.220:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1116/183943.545:ERROR:file_io_win.cc(162)] CreateFile C:\Users\mbajic\AppData\Local\Temp\scoped_dir55348_117616755\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[1116/183943.545:ERROR:file_io_win.cc(171)] CreateFile C:\Users\mbajic\AppData\Local\Temp\scoped_dir55348_117616755\Crashpad\reports\af0bdac9-6701-4910-8256-f3f49979c7ec.dmp: The system cannot find the path specified. (0x3)
+[1116/183943.545:ERROR:crash_report_exception_handler.cc(99)] PrepareNewCrashReport failed
