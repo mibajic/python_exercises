@@ -59,6 +59,19 @@ class WebChecker(unittest.TestCase):
         checkmark = driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
         assert checkmark.is_displayed()
 
+    # exercise 'describe dimensions' given correct query
+    def test_describe_dimensions(self):
+        driver = self.driver
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-dimensions")
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
+        editor = driver.find_element_by_css_selector('.CodeMirror  textarea')
+        editor.send_keys('DESCRIBE ?dimension \n WHERE { \n   ?dimension a qb:DimensionProperty . \n } ')
+        send_button = driver.find_element_by_xpath('//button[text()="Submit"]')
+        send_button.click()
+        driver.implicitly_wait(20)
+        checkmark = driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
+        assert checkmark.is_displayed()
+
     def tearDown(self):
         time.sleep(4)
         # self.driver.close()
