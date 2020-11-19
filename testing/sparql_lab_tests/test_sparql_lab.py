@@ -8,74 +8,48 @@ from selenium.webdriver.common import action_chains
 from selenium.webdriver.common.keys import Keys
 
 
-class WebChecker(unittest.TestCase):
+class CorrectQueriesChecker(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(r'C:\Users\mbajic\Documents\python\testing\sparql_lab_tests\chromedriver.exe')
 
-    # functions checks if page is running
-    def test_page_running(self):
-        driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
-        title = driver.find_element_by_tag_name("h1")
-        assert 'Exercises by difficulty' in title.text
-        # self.assertIn("Exercises by difficulty", title.text)
+    def test_load_test_cases(self):
+        global url
+        global query
+        for test_case, url_and_query in self.test_cases_dict.items():
+            # print("Test case: {}, URL:{}, query: {}".format(test_case, url_and_query[0], url_and_query[1]))
+            url = url_and_query[0]
+            query = url_and_query[1]
+            # print("url is: ", url)
+            # print("query is: ", query)
+            self.query_checker_helper(url, query)
 
-    # function checks if there are correct elements in the navigation bar
-    def test_navigation_bar(self):
-        driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
-        nav_bar = driver.find_element_by_id("collapsing-navbar")
-        assert "SPARQLabβ" in nav_bar.text
-        assert "Exercises" in nav_bar.text
-        assert "SPARQL endpoint" in nav_bar.text
-        assert "Data" in nav_bar.text
-        assert "About" in nav_bar.text
+    test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-dimensions",
+                           'PREFIX qb: <http://purl.org/linked-data/cube#> \n'
+                           'DESCRIBE ?dimension \n WHERE { \n   ?dimension a qb:DimensionProperty . \n } '],
+                       2: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram",
+                           'SELECT ?class (COUNT(?s) AS ?count) \n WHERE { \n ?s a ?class . \n } '
+                           '\n GROUP BY ?class \n ORDER BY DESC(?count)']}
 
-    # exercise 'show some data' given correct query
-    def test_show_data(self):
-        driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-data")
-        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
-        editor = driver.find_element_by_css_selector('.CodeMirror  textarea')
-        editor.send_keys('ASK { \n [] ?p [] . \n }')
-        send_button = driver.find_element_by_xpath('//button[text()="Submit"]')
+    def query_checker_helper(self, url, query):
+        self.driver.get(url)
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
+        editor = self.driver.find_element_by_css_selector('.CodeMirror  textarea')
+        editor.send_keys(Keys.CONTROL + "a")
+        editor.send_keys(Keys.DELETE)
+        editor.send_keys(query)
+        send_button = self.driver.find_element_by_xpath('//button[text()="Submit"]')
         send_button.click()
-        driver.implicitly_wait(20)
-        checkmark = driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
-        assert checkmark.is_displayed()
-
-    # exercise 'classes histogram' given correct query
-    def test_classes_histogram(self):
-        driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram")
-        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
-        editor = driver.find_element_by_css_selector('.CodeMirror  textarea')
-        editor.send_keys('SELECT ?class (COUNT(?s) AS ?count) \n WHERE { \n ?s a ?class . \n } \n GROUP BY ?class \n '
-                         'ORDER BY DESC(?count)')
-        send_button = driver.find_element_by_xpath('//button[text()="Submit"]')
-        send_button.click()
-        driver.implicitly_wait(20)
-        checkmark = driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
-        assert checkmark.is_displayed()
-
-    # exercise 'describe dimensions' given correct query
-    def test_describe_dimensions(self):
-        driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-dimensions")
-        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
-        editor = driver.find_element_by_css_selector('.CodeMirror  textarea')
-        editor.send_keys('DESCRIBE ?dimension \n WHERE { \n   ?dimension a qb:DimensionProperty . \n } ')
-        send_button = driver.find_element_by_xpath('//button[text()="Submit"]')
-        send_button.click()
-        driver.implicitly_wait(20)
-        checkmark = driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
+        self.driver.implicitly_wait(20)
+        checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
         assert checkmark.is_displayed()
 
     def tearDown(self):
-        time.sleep(4)
+        time.sleep(60)
         # self.driver.close()
 
+
+CorrectQueriesChecker()
 
 if __name__ == "__main__":
     unittest.main()
