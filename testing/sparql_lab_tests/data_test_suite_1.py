@@ -66,5 +66,83 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                    23: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/most-common-class-data",
                         'SELECT ?class (COUNT(?s) AS ?count) \n WHERE { \n   GRAPH '
                         '<https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { \n ?s a ?class . '
-                        '\n } \n } \n GROUP BY ?class \n ORDER BY DESC(?count) \n LIMIT 1']
+                        '\n } \n } \n GROUP BY ?class \n ORDER BY DESC(?count) \n LIMIT 1'],
+                   24: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-metadata",
+                        'SELECT ?class (COUNT(?s) AS ?count) \n WHERE { \n   GRAPH '
+                        '<https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech/metadata> { '
+                        '\n ?s a ?class . \n } \n } \n GROUP BY ?class \n ORDER BY DESC(?count)'],
+                   25: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-districts",
+                        'PREFIX ruian: <https://data.cssz.cz/ontology/ruian/> \n SELECT (COUNT(?okres) AS ?count) '
+                        '\n WHERE { \n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                        '\n  ?okres a ruian:Okres . \n } \n }'],
+                   26: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/datasets",
+                        'PREFIX qb: <http://purl.org/linked-data/cube#> \n SELECT DISTINCT ?dataset \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n   ?dataset a qb:DataSet . \n } \n } '],
+                   27: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-data",
+                        'SELECT ?property (COUNT(*) AS ?count) \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n [] ?property [] . \n } \n } \n GROUP BY ?property \n ORDER BY DESC(?count)'],
+                   28: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/reflexive-exact-match",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n SELECT DISTINCT ?concept \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                        '\n     ?concept skos:exactMatch ?concept . \n } \n }'],
+                   29: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-metadata",
+                        'SELECT ?property (COUNT(*) AS ?count) \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech/metadata> { '
+                        '\n [] ?property [] . \n } \n } GROUP BY ?property \n ORDER BY DESC(?count)'],
+                   30: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/datatypes",
+                        'SELECT ?datatype (COUNT(*) AS ?count) \n WHERE { \n   [] ?p ?literal . '
+                        '\n   FILTER (isLiteral(?literal) && datatype(?literal) != "") '
+                        '\n   BIND (datatype(?literal) AS ?datatype) \n } '
+                        '\n GROUP BY ?datatype \n ORDER BY DESC(?count)'],
+                   31: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-datasets",
+                        'PREFIX qb: <http://purl.org/linked-data/cube#> \n SELECT (COUNT(DISTINCT ?dataSet) AS ?count) '
+                        '\n WHERE { \n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        ' \n     ?dataSet a qb:DataSet . \n } \n }'],
+                   32: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-qb-observation-data",
+                        'PREFIX qb: <http://purl.org/linked-data/cube#> \n SELECT DISTINCT ?property \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n     [] a qb:Observation ; \n       ?property [] . \n } \n }'],
+                   33: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/component-property-subproperties",
+                        'PREFIX qb:   <http://purl.org/linked-data/cube#> \n '
+                        'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n SELECT ?property \n WHERE { '
+                        '\n   GRAPH <http://purl.org/linked-data/cube> { '
+                        '\n     ?property rdfs:subPropertyOf qb:componentProperty . \n } \n }'],
+                   34: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/data-structure-definition",
+                        'PREFIX qb: <http://purl.org/linked-data/cube#> \n SELECT ?dsd \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n     <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
+                        'qb:structure ?dsd . \n } \n }'],
+                   35: []
                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

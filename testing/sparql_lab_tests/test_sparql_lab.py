@@ -22,7 +22,8 @@ class CorrectQueriesChecker(unittest.TestCase):
                 url = url_and_query[0]
                 query = url_and_query[1]
                 self.driver.get(url)
-                WebDriverWait(self.driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
+                WebDriverWait(self.driver, 60).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
                 editor = self.driver.find_element_by_css_selector('.CodeMirror  textarea')
                 editor.send_keys(Keys.CONTROL + "a")
                 editor.send_keys(Keys.DELETE)
@@ -32,7 +33,6 @@ class CorrectQueriesChecker(unittest.TestCase):
                 self.driver.implicitly_wait(20)
                 checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
                 assert checkmark.is_displayed()
-
 
     def tearDown(self):
         # time.sleep(60)
