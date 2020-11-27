@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: parametrized
+Version: 0.1
+Summary: A decorator collection allowing for simple parametrized test case definitions.
+Home-page: UNKNOWN
+Author: Jakub Szafrański
+Author-email: kontakt@samu.pl
+License: MIT
+Description: UNKNOWN
+Keywords: parametrized tests
+Platform: UNKNOWN
