@@ -114,7 +114,23 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
                         '\n     <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
                         'qb:structure ?dsd . \n } \n }'],
-                   35: []
+                   35: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/czech-county-labels",
+                        'PREFIX ruian: <https://data.cssz.cz/ontology/ruian/> '
+                        '\n PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> \n SELECT DISTINCT ?label \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                        '\n     [] a ruian:Okres ; \n       skos:prefLabel ?label . \n } \n }'],
+                   36: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/collection-disjoint-with-concept-and-concept"
+                        "-scheme",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n ASK \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                        '\n     VALUES ?disjointClass { \n       skos:Concept \n       skos:ConceptScheme \n } '
+                        '\n     ?collection a skos:Collection, ?disjointClass . \n } \n }'],
+                   37: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/label-without-language",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n ASK \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                        '\n     VALUES ?labelProperty { \n       skos:prefLabel \n       skos:altLabel '
+                        '\n       skos:hiddenLabel \n     } \n     [] ?labelProperty ?label . '
+                        '\n     FILTER (lang(?label) = "") \n  }']
                    }
 
 
