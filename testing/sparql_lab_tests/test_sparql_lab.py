@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from data_test_suite_1 import test_cases_dict
+from data_correct_queries_checker import test_cases_dict
 
 
 class CorrectQueriesChecker(unittest.TestCase):
@@ -40,6 +40,36 @@ class CorrectQueriesChecker(unittest.TestCase):
 
 
 CorrectQueriesChecker()
+
+
+class UiElementsChecker(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(executable_path=r"C:\Users\mbajic\Documents\python\testing\sparql_lab_tests"
+                                                       r"\chromedriver.exe")
+
+    def test_page_running(self):
+        driver = self.driver
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        title = driver.find_element_by_tag_name("h1")
+        assert 'Exercises by difficulty' in title.text
+        # self.assertIn("Exercises by difficulty", title.text)
+
+    def test_navigation_bar(self):
+        driver = self.driver
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        nav_bar = driver.find_element_by_id("collapsing-navbar")
+        assert "SPARQLabβ" in nav_bar.text
+        assert "Exercises" in nav_bar.text
+        assert "SPARQL endpoint" in nav_bar.text
+        assert "Data" in nav_bar.text
+        assert "About" in nav_bar.text
+
+    def tearDown(self):
+        # time.sleep(60)
+        self.driver.close()
+
+
+UiElementsChecker()
 
 if __name__ == "__main__":
     unittest.main()
