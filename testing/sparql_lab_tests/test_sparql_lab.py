@@ -8,41 +8,42 @@ from selenium.webdriver.support.ui import WebDriverWait
 from data_correct_queries_checker import test_cases_dict
 
 
-# class CorrectQueriesChecker(unittest.TestCase):
-#
-#     def setUp(self):
-#         self.driver = webdriver.Chrome(executable_path=r'C:/Users/mbajic/Documents/python/testing/sparql_lab_tests'
-#                                                           r'/chromedriver.exe')
-#
-#     def test_load_test_cases(self):
-#         global url
-#         global query
-#         for test_case, url_and_query in test_cases_dict.items():
-#             with self.subTest(test_case=test_case, url_and_query=url_and_query):
-#                 url = url_and_query[0]
-#                 query = url_and_query[1]
-#                 self.driver.get(url)
-#                 WebDriverWait(self.driver, 60).until(
-#                     EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
-#                 editor = self.driver.find_element_by_css_selector('.CodeMirror  textarea')
-#                 editor.send_keys(Keys.CONTROL + "a")
-#                 editor.send_keys(Keys.DELETE)
-#                 editor.send_keys(query)
-#                 send_button = self.driver.find_element_by_xpath('//button[text()="Submit"]')
-#                 send_button.click()
-#                 self.driver.implicitly_wait(20)
-#                 checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
-#                 assert checkmark.is_displayed()
-#
-#     def tearDown(self):
-#         # time.sleep(60)
-#         self.driver.close()
-#
-#
-# CorrectQueriesChecker()
+class CorrectQueriesChecker(unittest.TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Chrome(executable_path=r'C:/Users/mbajic/Documents/python/testing/sparql_lab_tests'
+                                                          r'/chromedriver.exe')
+
+    def test_load_test_cases(self):
+        global url
+        global query
+        for test_case, url_and_query in test_cases_dict.items():
+            with self.subTest(test_case=test_case, url_and_query=url_and_query):
+                url = url_and_query[0]
+                query = url_and_query[1]
+                self.driver.get(url)
+                WebDriverWait(self.driver, 60).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
+                editor = self.driver.find_element_by_css_selector('.CodeMirror  textarea')
+                editor.send_keys(Keys.CONTROL + "a")
+                editor.send_keys(Keys.DELETE)
+                editor.send_keys(query)
+                send_button = self.driver.find_element_by_xpath('//button[text()="Submit"]')
+                send_button.click()
+                self.driver.implicitly_wait(20)
+                checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
+                assert checkmark.is_displayed()
+
+    def tearDown(self):
+        # time.sleep(60)
+        self.driver.close()
+
+
+CorrectQueriesChecker()
 
 
 class UiElementsChecker(unittest.TestCase):
+
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path=r'C:/Users/mbajic/Documents/python/testing/sparql_lab_tests'
                                                        r'/chromedriver.exe')
@@ -78,11 +79,16 @@ class UiElementsChecker(unittest.TestCase):
     def test_about_option(self):
         driver = self.driver
         driver.get("https://doc.lmcloud.vse.cz/sparqlab")
-        about = driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[4]/a')
-        about.click()
-        header_text = driver.find_element_by_xpath("/html/body/div/div/div/p[1]")
-        assert "SPARQLab serves for exercising the SPARQL query language." in header_text.text
+        driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[4]/a').click()
+        assert "SPARQLab serves for exercising the SPARQL query language." in driver.find_element_by_xpath(
+            "/html/body/div/div/div/p[1]").text
 
+    def test_exercises_menu(self):
+        driver = self.driver
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/a').click()
+        # a = driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]')
+        assert "By language constructs" in driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]').text
 
     def tearDown(self):
         # time.sleep(60)
