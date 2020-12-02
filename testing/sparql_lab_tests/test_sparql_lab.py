@@ -75,6 +75,15 @@ class UiElementsChecker(unittest.TestCase):
         found_exercise = self.driver.find_element_by_xpath('/html/body/div/ul')
         assert "Datové typy" in found_exercise.text
 
+    def test_about_option(self):
+        driver = self.driver
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        about = driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[4]/a')
+        about.click()
+        header_text = driver.find_element_by_xpath("/html/body/div/div/div/p[1]")
+        assert "SPARQLab serves for exercising the SPARQL query language." in header_text.text
+
+
     def tearDown(self):
         # time.sleep(60)
         self.driver.close()
