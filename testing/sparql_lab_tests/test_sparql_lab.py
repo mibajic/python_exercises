@@ -71,24 +71,22 @@ class UiElementsChecker(unittest.TestCase):
         search = self.driver.find_element_by_xpath('//*[@id="search-term"]')
         search.click()
         search.send_keys("datatype")
-        datatype_menu = self.driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/form/div/div/div/ul/li/mark')
-        datatype_menu.click()
-        found_exercise = self.driver.find_element_by_xpath('/html/body/div/ul')
-        assert "Datové typy" in found_exercise.text
+        self.driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/form/div/div/div/ul/li/mark').click()
+        assert "Datové typy" in self.driver.find_element_by_xpath('/html/body/div/ul').text
 
     def test_about_option(self):
         driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        self.driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[4]/a').click()
-        assert "SPARQLab serves for exercising the SPARQL query language." in driver.find_element_by_xpath(
+        assert "SPARQLab serves for exercising the SPARQL query language." in self.driver.find_element_by_xpath(
             "/html/body/div/div/div/p[1]").text
 
     def test_exercises_menu(self):
         driver = self.driver
-        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        self.driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/a').click()
-        # a = driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]')
-        assert "By language constructs" in driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]').text
+        assert "By language constructs" in driver.find_element_by_xpath(
+            '//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]').text
 
     def tearDown(self):
         # time.sleep(60)
