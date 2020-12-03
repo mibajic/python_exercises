@@ -130,7 +130,7 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
                         '\n     VALUES ?labelProperty { \n       skos:prefLabel \n       skos:altLabel '
                         '\n       skos:hiddenLabel \n     } \n     [] ?labelProperty ?label . '
-                        '\n     FILTER (lang(?label) = "") \n  }']
+                        '\n     FILTER (lang(?label) = "") \n  } \n }']
                    }
 
 
