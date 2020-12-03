@@ -130,7 +130,19 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
                         '\n     VALUES ?labelProperty { \n       skos:prefLabel \n       skos:altLabel '
                         '\n       skos:hiddenLabel \n     } \n     [] ?labelProperty ?label . '
-                        '\n     FILTER (lang(?label) = "") \n  } \n }']
+                        '\n     FILTER (lang(?label) = "") \n  } \n }'],
+                   38: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/evaluate/empty-labels",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
+                        '\n ASK \n WHERE { \n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> '
+                        '{ \n     VALUES ?labelProperty { \n       skos:prefLabel \n       skos:altLabel '
+                        '\n        skos:hiddenLabel \n     } \n     [] ?labelProperty ?label . '
+                        '\n     FILTER (STRLEN(?label) = 0) \n   } \n }  '],
+                   39: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pairwise-disjoint-skos-match-properties",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n ASK \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                        '\n     VALUES ?disjointProperty { \n       skos:broadMatch \n       skos:narrowMatch '
+                        '\n       skos:relatedMatch \n    } \n     ?a skos:exactMatch ?b ; '
+                        '\n       ?disjointProperty ?b . \n   } \n }']
                    }
 
 
