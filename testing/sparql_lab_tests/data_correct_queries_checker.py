@@ -552,6 +552,59 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   pension-kind:PK_total_without_special_pensions_2008 skos:narrower* ?member .'
                         '\n   ?member skos:narrower* pension-kind:PK_S_2008 .'
                         '\n  }'
+                        '\n }'],
+
+                   57: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/multiple-pref-labels-per-language",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT ?concept ?language'
+                        '\n   WHERE {'
+                        '\n    GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n     ?concept skos:prefLabel ?prefLabel .'
+                        '\n     BIND (lang(?prefLabel) AS ?language)'
+                        '\n    }'
+                        '\n   }'
+                        '\n   GROUP BY ?concept ?language'
+                        '\n   HAVING (COUNT(?prefLabel) > 1)'
+                        '\n  }'
+                        '\n }'],
+
+                   58: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/highest-pension",
+                        'PREFIX cssz-measure: <https://data.cssz.cz/ontology/measure/>'
+                        '\n CONSTRUCT {'
+                        '\n  ?observation ?p ?o .'
+                        '\n }'
+                        '\n FROM <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech>'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT ?observation'
+                        '\n   WHERE {'
+                        '\n    ?observation cssz-measure:prumerna-vyse-duchodu-v-kc ?pension .'
+                        '\n   }'
+                        '\n   ORDER BY DESC(?pension)'
+                        '\n   LIMIT 1'
+                        '\n  }'
+                        '\n  ?observation ?p ?o .'
+                        '\n }'],
+
+                   59: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ref-area-classes",
+                        'PREFIX cssz-dimension: <https://data.cssz.cz/ontology/dimension/>'
+                        '\n SELECT DISTINCT ?class'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT DISTINCT ?refArea'
+                        '\n   WHERE {'
+                        '\n    GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n     [] cssz-dimension:refArea ?refArea .'
+                        '\n     }'
+                        '\n    }'
+                        '\n   }'
+                        '\n  }' 
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?refArea a ?class .'
+                        '\n  }'
                         '\n }']
 
                    }
