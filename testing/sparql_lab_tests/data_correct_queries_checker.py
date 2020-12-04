@@ -142,7 +142,39 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
                         '\n     VALUES ?disjointProperty { \n       skos:broadMatch \n       skos:narrowMatch '
                         '\n       skos:relatedMatch \n    } \n     ?a skos:exactMatch ?b ; '
-                        '\n       ?disjointProperty ?b . \n   } \n }']
+                        '\n       ?disjointProperty ?b . \n   } \n }'],
+                   40: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/old-age-pension-kinds",
+                        'PREFIX pension-kind: <https://data.cssz.cz/resource/pension-kind/> '
+                        '\n PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n SELECT ?pensionKind \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n     ?pensionKind skos:exactMatch pension-kind:PK_old_age_total_without_SR . '
+                        '\n   } \n }'],
+                   41: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-kind-schemes",
+                        'PREFIX pen-onto: <http://data.cssz.cz/ontology/pension-kinds/> '
+                        '\n PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> '
+                        '\n SELECT DISTINCT ?pensionKindScheme \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n     [] a pen-onto:PensionKind ; \n       skos:inScheme ?pensionKindScheme . '
+                        '\n   } \n }'],
+                   42: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-measures",
+                        'PREFIX qb:   <http://purl.org/linked-data/cube#> \n SELECT DISTINCT ?measure \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n     <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
+                        'qb:structure/qb:component/(qb:measure|qb:componentProperty) ?measure . '
+                        '\n     ?measure a qb:MeasureProperty . \n    } \n }'],
+                   43: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-attributes",
+                        'PREFIX qb:   <http://purl.org/linked-data/cube#> \n SELECT ?attribute \n WHERE { '
+                        '\n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n     <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> qb:structure ?dsd . '
+                        '\n     ?dsd qb:component [ \n       ?property ?attribute \n     ] . '
+                        '\n     ?attribute a qb:AttributeProperty . \n    } \n }'],
+                   44: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-dimensions",
+                        'PREFIX qb:   <http://purl.org/linked-data/cube#> \n SELECT DISTINCT ?dimension '
+                        '\n WHERE { \n   GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { '
+                        '\n     <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
+                        'qb:structure/qb:component/(qb:dimension|qb:componentProperty) ?dimension . '
+                        '  } \n } ']
                    }
 
 
