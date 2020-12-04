@@ -410,5 +410,148 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
                         'qb:structure/qb:component/(qb:dimension|qb:componentProperty) ?dimension . '
                         '\n  } '
-                        '\n } ']
+                        '\n } '],
+
+                   46: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-without-distinct",
+                        'SELECT (COUNT(?class) AS ?count) '
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT ?class'
+                        '\n    WHERE {'
+                        '\n    GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n    [] a ?class .'
+                        '\n    }'
+                        '\n   }'
+                        '\n   GROUP BY ?class'
+                        '\n  }'
+                        '\n }'],
+
+                   47: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/"
+                        "overlapping-associative-and-hierarchical-relations",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?a skos:related ?b ;'
+                        '\n    skos:broaderTransitive+|skos:narrowerTransitive+ ?b .'
+                        '\n  }'
+                        '\n }'],
+
+                   48: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/object-property-path",
+                        'SELECT ?class1 ?p ?class2 (COUNT(*) AS ?count)'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n   [ a ?class1 ] ?p [ a ?class2 ] .'
+                        '\n  }'
+                        '\n }'
+                        '\n GROUP BY ?class1 ?p ?class2'
+                        '\n ORDER BY DESC(?count)'],
+
+                   49: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/valueless-associative-relations",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   [] skos:narrower ?a, ?b .'
+                        '\n   {'
+                        '\n    ?a skos:related ?b .'
+                        '\n   } UNION {'
+                        '\n    ?b skos:related ?a .'
+                        '\n   }'
+                        '\n  }'
+                        '\n }'],
+
+                   50: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/cyclic-hierchical-relations",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   {'
+                        '\n    ?concept skos:broaderTransitive+ ?concept .'
+                        '\n   } UNION {'
+                        '\n    ?concept skos:narrowerTransitive+ ?concept .'
+                        '\n   }'
+                        '\n  }'
+                        '\n }'],
+
+                   51: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/omitted-top-concepts",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?conceptScheme a skos:ConceptScheme .'
+                        '\n   FILTER NOT EXISTS {'
+                        '\n    ?conceptScheme skos:hasTopConcept|^skos:topConceptOf [] .'
+                        '\n   }'
+                        '\n  }'
+                        '\n }'],
+
+                   52: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ambiguous-notation-references",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?a skos:inScheme ?scheme ;'
+                        '\n    skos:notation ?notation .'
+                        '\n   ?b skos:inScheme ?scheme ;'
+                        '\n    skos:notation ?notation .'
+                        '\n   FILTER (!sameTerm(?a, ?b))'
+                        '\n  }'
+                        '\n }'],
+
+                   53: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-pension-kinds",
+                        'PREFIX pen-onto: <http://data.cssz.cz/ontology/pension-kinds/>'
+                        '\n PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>'
+                        '\n SELECT (COUNT(DISTINCT ?concept) AS ?count)'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?concept skos:inScheme pen-onto:PensionKindScheme_2008 .'
+                        '\n  }'
+                        '\n }'],
+
+                   54: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-with-reduced",
+                        'SELECT (COUNT(?class) AS ?count)'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT REDUCED ?class'
+                        '\n   WHERE {'
+                        '\n    {'
+                        '\n     SELECT ?class'
+                        '\n     WHERE {'
+                        '\n      GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n       [] a ?class .'
+                        '\n      }'
+                        '\n     }'
+                        '\n     ORDER BY ?class'
+                        '\n    }'
+                        '\n   }'
+                        '\n  }'
+                        '\n }'],
+
+                   55: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/unprintable-characters-in-labels",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   VALUES ?labelProperty {'
+                        '\n    skos:prefLabel'
+                        '\n    skos:altLabel'
+                        '\n    skos:hiddenLabel'
+                        '\n   }'
+                        '\n   [] ?labelProperty ?label .'
+                        '\n   FILTER REGEX(?label, "^.*\\p{Zl}|\\p{Zp}|\\p{C}.*$")'
+                        '\n  }'
+                        '\n }'],
+
+                   56: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/path-between-pension-kinds",
+                        'PREFIX pension-kind: <https://data.cssz.cz/resource/pension-kind/> '
+                        '\n PREFIX skos:          <http://www.w3.org/2004/02/skos/core#>'
+                        '\n SELECT ?member'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   pension-kind:PK_total_without_special_pensions_2008 skos:narrower* ?member .'
+                        '\n   ?member skos:narrower* pension-kind:PK_S_2008 .'
+                        '\n  }'
+                        '\n }']
+
                    }
