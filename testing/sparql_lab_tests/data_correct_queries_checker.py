@@ -297,19 +297,20 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n  } '
                         '\n }'],
 
-                   36: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/collection-disjoint-with-concept-and-concept"
-                        "-scheme",
-                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
-                        '\n ASK '
-                        '\n WHERE { '
-                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
-                        '\n   VALUES ?disjointClass { '
-                        '\n       skos:Concept '
-                        '\n       skos:ConceptScheme '
-                        '\n    } '
-                        '\n     ?collection a skos:Collection, ?disjointClass . '
-                        '\n   } '
-                        '\n }'],
+                   36: [
+                       "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/collection-disjoint-with-concept-and-concept"
+                       "-scheme",
+                       'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
+                       '\n ASK '
+                       '\n WHERE { '
+                       '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { '
+                       '\n   VALUES ?disjointClass { '
+                       '\n       skos:Concept '
+                       '\n       skos:ConceptScheme '
+                       '\n    } '
+                       '\n     ?collection a skos:Collection, ?disjointClass . '
+                       '\n   } '
+                       '\n }'],
 
                    37: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/label-without-language",
                         'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
@@ -600,10 +601,27 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n     [] cssz-dimension:refArea ?refArea .'
                         '\n     }'
                         '\n    }'
-                        '\n   }' 
+                        '\n   }'
                         '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
                         '\n   ?refArea a ?class .'
                         '\n  }'
-                        '\n }']
+                        '\n }'],
 
+                   60: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pairwise-disjoint-skos-label-properties",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   {'
+                        '\n    ?concept skos:prefLabel ?label ;'
+                        '\n      skos:altLabel ?label .'
+                        '\n    } UNION {'
+                        '\n     ?concept skos:altLabel ?label ;'
+                        '\n       skos:hiddenLabel ?label .'
+                        '\n    } UNION {'
+                        '\n     ?concept skos:prefLabel ?label ;'
+                        '\n       skos:hiddenLabel ?label .'
+                        '\n   }'
+                        '\n  }'
+                        '\n }']
                    }

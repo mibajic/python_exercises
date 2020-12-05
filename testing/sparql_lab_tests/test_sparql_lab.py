@@ -12,7 +12,7 @@ class CorrectQueriesChecker(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path=r'C:/Users/mbajic/Documents/python/testing/sparql_lab_tests'
-                                                          r'/chromedriver.exe')
+                                                       r'/chromedriver.exe')
 
     def test_load_test_cases(self):
         global url
@@ -66,24 +66,24 @@ class UiElementsChecker(unittest.TestCase):
         assert "About" in nav_bar.text
 
     def test_search_function(self):
-        self.driver = self.driver
-        self.driver.get("https://doc.lmcloud.vse.cz/sparqlab")
-        search = self.driver.find_element_by_xpath('//*[@id="search-term"]')
+        driver = self.driver
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        search = driver.find_element_by_xpath('//*[@id="search-term"]')
         search.click()
         search.send_keys("datatype")
-        self.driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/form/div/div/div/ul/li/mark').click()
-        assert "Datové typy" in self.driver.find_element_by_xpath('/html/body/div/ul').text
+        driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/form/div/div/div/ul/li/mark').click()
+        assert "Datové typy" in driver.find_element_by_xpath('/html/body/div/ul').text
 
     def test_about_option(self):
         driver = self.driver
-        self.driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[4]/a').click()
-        assert "SPARQLab serves for exercising the SPARQL query language." in self.driver.find_element_by_xpath(
+        assert "SPARQLab serves for exercising the SPARQL query language." in driver.find_element_by_xpath(
             "/html/body/div/div/div/p[1]").text
 
     def test_exercises_menu(self):
         driver = self.driver
-        self.driver.get("https://doc.lmcloud.vse.cz/sparqlab")
+        driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/a').click()
         assert "By language constructs" in driver.find_element_by_xpath(
             '//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]').text
@@ -95,5 +95,12 @@ class UiElementsChecker(unittest.TestCase):
 
 UiElementsChecker()
 
+
+class NumbersTestResult(unittest.TextTestResult):
+    def addSubTest(self, test, subtest, outcome):
+        super(NumbersTestResult, self).addSubTest(test, subtest, outcome)
+        self.testsRun += 1
+
+
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(testRunner=unittest.TextTestRunner(resultclass=NumbersTestResult))
