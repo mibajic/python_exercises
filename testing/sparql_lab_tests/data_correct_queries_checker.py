@@ -326,7 +326,7 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   } '
                         '\n }'],
 
-                   38: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/evaluate/empty-labels",
+                   38: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/empty-labels",
                         'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> '
                         '\n ASK '
                         '\n WHERE { '
@@ -539,7 +539,7 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n    skos:hiddenLabel'
                         '\n   }'
                         '\n   [] ?labelProperty ?label .'
-                        '\n   FILTER REGEX(?label, "^.*\\p{Zl}|\\p{Zp}|\\p{C}.*$")'
+                        '\n' r'FILTER REGEX(?label, "^.*\\p{Zl}|\\p{Zp}|\\p{C}.*$")'
                         '\n  }'
                         '\n }'],
 
@@ -600,8 +600,7 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n     [] cssz-dimension:refArea ?refArea .'
                         '\n     }'
                         '\n    }'
-                        '\n   }'
-                        '\n  }' 
+                        '\n   }' 
                         '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
                         '\n   ?refArea a ?class .'
                         '\n  }'
