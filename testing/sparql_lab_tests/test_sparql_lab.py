@@ -19,22 +19,21 @@ class CorrectQueriesChecker(unittest.TestCase):
     def test_load_test_cases(self):
         global url
         global query
-        driver = self.driver
         for test_case, url_and_query in test_cases_dict.items():
             with self.subTest(test_case=test_case, url_and_query=url_and_query):
                 url = url_and_query[0]
                 query = url_and_query[1]
-                driver.get(url)
-                WebDriverWait(driver, 60).until(
-                    EC.presence_of_element_located((By.CLASS_NAME, 'CodeMirror-scroll'))) 
-                editor = driver.find_element_by_css_selector('.CodeMirror  textarea')
+                self.driver.get(url)
+                WebDriverWait(self.driver, 60).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
+                editor = self.driver.find_element_by_css_selector('.CodeMirror  textarea')
                 editor.send_keys(Keys.CONTROL + "a")
                 editor.send_keys(Keys.DELETE)
                 editor.send_keys(query)
-                send_button = driver.find_element_by_xpath('//button[text()="Submit""]')
+                send_button = self.driver.find_element_by_xpath('//button[text()="Submit"]')
                 send_button.click()
-                driver.implicitly_wait(20)
-                checkmark = driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
+                self.driver.implicitly_wait(20)
+                checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
                 assert checkmark.is_displayed()
 
     def tearDown(self):
@@ -48,8 +47,10 @@ CorrectQueriesChecker()
 class UiElementsChecker(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome(executable_path=r'C:/Users/mbajic/Documents/python/testing/sparql_lab_tests'
-                                                       r'/chromedriver.exe')
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        self.driver = webdriver.Chrome(options=options, executable_path=r'C:/Users/mbajic/Documents/python/'
+                                                                        r'testing/sparql_lab_tests/chromedriver.exe')
 
     def test_page_running(self):
         driver = self.driver
