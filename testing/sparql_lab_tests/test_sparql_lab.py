@@ -30,8 +30,7 @@ class CorrectQueriesChecker(unittest.TestCase):
                 editor.send_keys(Keys.CONTROL + "a")
                 editor.send_keys(Keys.DELETE)
                 editor.send_keys(query)
-                send_button = self.driver.find_element_by_xpath('//button[text()="Submit"]')
-                send_button.click()
+                self.driver.find_element_by_xpath('//button[text()="Submit"]').click()
                 self.driver.implicitly_wait(20)
                 checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
                 assert checkmark.is_displayed()
@@ -55,9 +54,7 @@ class UiElementsChecker(unittest.TestCase):
     def test_page_running(self):
         driver = self.driver
         driver.get("https://doc.lmcloud.vse.cz/sparqlab")
-        title = driver.find_element_by_tag_name("h1")
-        assert 'Exercises by difficulty' in title.text
-        # self.assertIn("Exercises by difficulty", title.text)
+        assert 'Exercises by difficulty' in driver.find_element_by_tag_name("h1").text
 
     def test_navigation_bar(self):
         driver = self.driver
