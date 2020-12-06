@@ -623,5 +623,87 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n       skos:hiddenLabel ?label .'
                         '\n   }'
                         '\n  }'
+                        '\n }'],
+
+                   62: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/concepts-in-multiple-schemes",
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n CONSTRUCT {'
+                        '\n  ?concept skos:inScheme ?conceptScheme .'
+                        '\n }'
+                        '\n FROM <https://data.cssz.cz/resource/dataset/pomocne-ciselniky>'
+                        '\n WHERE {'
+                        '\n   {'
+                        '\n    SELECT ?concept'
+                        '\n    WHERE {'
+                        '\n     ?concept a skos:Concept ;'
+                        '\n      skos:inScheme ?conceptScheme .'
+                        '\n    }'
+                        '\n    GROUP BY ?concept'
+                        '\n    HAVING (COUNT(?conceptScheme) > 1)'
+                        '\n  }'
+                        '\n  ?concept skos:inScheme ?conceptScheme .'
+                        '\n }'],
+
+                   63: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dsd-has-normal-form",
+                        'PREFIX qb: <http://purl.org/linked-data/cube#>'
+                        '\n PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n   [] a qb:DataStructureDefinition ;'
+                        '\n    qb:component ?component .'
+                        '\n   FILTER NOT EXISTS {'
+                        '\n    ?component qb:componentAttachment ?componentAttachment .'
+                        '\n    FILTER (!sameTerm(?componentAttachment, qb:Observation))'
+                        '\n   }'
+                        '\n  }'
+                        '\n }'],
+
+                   64: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/is-pension-kinds-2008-polyhierarchical",
+                        'PREFIX pen-onto: <http://data.cssz.cz/ontology/pension-kinds/>'
+                        '\n PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT ?concept'
+                        '\n   WHERE {'
+                        '\n    GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n     ?concept skos:inScheme pen-onto:PensionKindScheme_2008 .'
+                        '\n     ?broader skos:narrower ?concept .'
+                        '\n    }'
+                        '\n   }'
+                        '\n   GROUP BY ?concept'
+                        '\n   HAVING (COUNT(DISTINCT ?broader) > 1)'
+                        '\n  }'
+                        '\n }'],
+
+                   65: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/hierarchical-code-lists",
+                        'PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>'
+                        '\n SELECT DISTINCT ?conceptScheme'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   VALUES ?hierarchicalProperty {'
+                        '\n    skos:broader'
+                        '\n    skos:broaderTransitive'
+                        '\n    skos:narrower'
+                        '\n    skos:narrowerTransitive'
+                        '\n   }'
+                        '\n   ?conceptScheme a skos:ConceptScheme .'
+                        '\n   [ skos:inScheme ?conceptScheme ] ?hierarchicalProperty [ skos:inScheme ?conceptScheme ] .'
+                        '\n  }'
                         '\n }']
                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
