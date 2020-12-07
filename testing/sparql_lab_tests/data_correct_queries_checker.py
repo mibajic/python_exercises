@@ -756,8 +756,224 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n   }'
                         '\n   ?broader skos:inScheme ?scheme .'
                         '\n  }'
+                        '\n }'],
+
+                   69: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/vocabularies",
+                        'SELECT ?vocabulary (COUNT(*) AS ?count)'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT DISTINCT ?term'
+                        '\n   WHERE {'
+                        '\n    GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n     [] a ?term .'
+                        '\n    }'
+                        '\n   }'
+                        '\n  } UNION {'
+                        '\n    SELECT DISTINCT ?term'
+                        '\n    WHERE {'
+                        '\n     GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n      [] ?term [] '
+                        '\n     }'
+                        '\n    }'
+                        '\n   }'
+                        '\n  BIND (IRI(REPLACE(STR(?term), "^(.+)(#|\\/).+$", "$1")) AS ?vocabulary)'
+                        '\n }'
+                        '\n GROUP BY ?vocabulary'
+                        '\n ORDER BY DESC(?count)'],
+
+                   72: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-concepts"
+                        'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?concept a skos:Concept .'
+                        '\n   FILTER NOT EXISTS {'
+                        '\n    {'
+                        '\n     VALUES ?semanticRelation {'
+                        '\n      skos:broader'
+                        '\n      skos:narrower'
+                        '\n      skos:related'
+                        '\n      skos:broaderTransitive'
+                        '\n      skos:narrowerTransitive'
+                        '\n     }'
+                        '\n     {'
+                        '\n      ?concept ?semanticRelation [] .'
+                        '\n     } UNION {'
+                        '\n      [] ?semanticRelation ?concept .'
+                        '\n     }'
+                        '\n    } UNION {'
+                        '\n     ?concept skos:topConceptOf|^skos:hasTopConcept [] .'
+                        '\n    }'
+                        '\n   }'
+                        '\n  }'
+                        '\n }'],
+
+                   73: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/is-multimeasure-dataset",
+                        'PREFIX qb:   <http://purl.org/linked-data/cube#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  {'
+                        '\n   SELECT ?dsd'
+                        '\n   WHERE {'
+                        '\n    GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n     <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
+                        'qb:structure ?dsd .'
+                        '\n     ?dsd qb:component ?component .'
+                        '\n     {'
+                        '\n      ?component qb:measure ?measureProperty .'
+                        '\n     } UNION {'
+                        '\n      ?component qb:componentProperty ?measureProperty .'
+                        '\n      ?measureProperty a qb:MeasureProperty .'
+                        '\n     }'
+                        '\n    }'
+                        '\n   }'
+                        '\n   GROUP BY ?dsd'
+                        '\n   HAVING (COUNT(DISTINCT ?measureProperty) > 1)'
+                        '\n  }'
+                        '\n }'],
+
+                   74: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ambiguous-notation-references-construct",
+                        'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>'
+                        '\n PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
+                        '\n PREFIX spin: <http://spinrdf.org/spin#>'
+                        '\n CONSTRUCT {'
+                        '\n  [] a spin:ConstraintViolation ;'
+                        '\n   spin:violationRoot ?a, ?b ;'
+                        '\n   spin:violationPath skos:notation ;'
+                        '\n   spin:violationValue ?notation ;'
+                        '\n   rdfs:comment "Concepts within the same concept scheme should not have identical '
+                        'skos:notation literals."@en ;'
+                        '\n   rdfs:seeAlso <https://github.com/cmader/qSKOS/wiki/'
+                        'Quality-Issues#ambiguous-notation-references> .'
+                        '\n }'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?a skos:inScheme ?scheme ;'
+                        '\n    skos:notation ?notation .'
+                        '\n   ?b skos:inScheme ?scheme ;'
+                        '\n    skos:notation ?notation .'
+                        '\n   FILTER (!sameTerm(?a, ?b))'
+                        '\n  }'
+                        '\n }'],
+
+                   75: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/greatest-range-of-pensions-between-areas",
+                        'PREFIX cssz-dimension: <https://data.cssz.cz/ontology/dimension/>'
+                        '\n PREFIX cssz-measure:   <https://data.cssz.cz/ontology/measure/>'
+                        '\n PREFIX pension-kind:   <https://data.cssz.cz/resource/pension-kind/>'
+                        '\n PREFIX skos:           <http://www.w3.org/2004/02/skos/core#>'
+                        '\n SELECT (MAX(?pension) - MIN(?pension) AS ?pensionRange)'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?pensionKind skos:exactMatch pension-kind:PK_old_age_total_without_SR .'
+                        '\n  }'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n   [] cssz-dimension:pohlavi ?gender ;'
+                        '\n    cssz-dimension:druh-duchodu ?pensionKind ;'
+                        '\n    cssz-dimension:refPeriod ?refPeriod ;'
+                        '\n    cssz-measure:prumerna-vyse-duchodu-v-kc ?pension .'
+                        '\n  }'
+                        '\n }'
+                        '\n GROUP BY ?gender ?refPeriod'
+                        '\n ORDER BY ?pensionRange'
+                        '\n LIMIT 1'],
+
+                   76: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-count-over-time",
+                        'PREFIX cssz-dimension: <https://data.cssz.cz/ontology/dimension/>'
+                        '\n PREFIX cssz-measure:   <https://data.cssz.cz/ontology/measure/>'
+                        '\n PREFIX pension-kind:   <https://data.cssz.cz/resource/pension-kind/>'
+                        '\n PREFIX qb:             <http://purl.org/linked-data/cube#>'
+                        '\n PREFIX skos:           <http://www.w3.org/2004/02/skos/core#>'
+                        '\n PREFIX xsd:            <http://www.w3.org/2001/XMLSchema#>'
+                        '\n SELECT DISTINCT ?year ?orphanCount'
+                        '\n FROM <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech>'
+                        '\n FROM <https://data.cssz.cz/resource/dataset/pomocne-ciselniky>'
+                        '\n WHERE {'
+                        '\n  [] a qb:Observation ;'
+                        '\n   cssz-dimension:druh-duchodu/skos:exactMatch pension-kind:PK_D ;'
+                        '\n   cssz-dimension:pohlavi <https://data.cssz.cz/ontology/sdmx/code/sex-T> ;'
+                        '\n   cssz-dimension:refArea <https://data.cssz.cz/resource/ruian/staty/1> ;'
+                        '\n   cssz-dimension:refPeriod/skos:notation ?refPeriod ;'
+                        '\n   cssz-measure:pocet-duchodcu ?orphanCount .'
+                        '\n  BIND (year(strdt(?refPeriod, xsd:date)) AS ?year)'
+                        '\n }'
+                        '\n ORDER BY ?year'],
+
+                   77: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/average-pension-per-region",
+                        'PREFIX cssz-dimension: <https://data.cssz.cz/ontology/dimension/>'
+                        '\n PREFIX cssz-measure:   <https://data.cssz.cz/ontology/measure/>'
+                        '\n PREFIX day:            <https://data.cssz.cz/resource/reference.data.gov.uk/'
+                        'id/gregorian-day/>'
+                        '\n PREFIX pension-kind:   <https://data.cssz.cz/resource/pension-kind/>'
+                        '\n PREFIX ruian:          <https://data.cssz.cz/ontology/ruian/>'
+                        '\n PREFIX sdmx-code:      <http://purl.org/linked-data/sdmx/2009/code#>'
+                        '\n PREFIX skos:           <http://www.w3.org/2004/02/skos/core#>'
+                        '\n SELECT (AVG(?pension) AS ?avgPensionPerRegion)'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?pensionKind skos:exactMatch pension-kind:PK_old_age_total_without_SR .'
+                        '\n   ?refArea a ruian:Vusc .'
+                        '\n  }'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n   [] cssz-dimension:refPeriod day:2015-12-31 ;'
+                        '\n    cssz-dimension:pohlavi sdmx-code:sex-T ;'
+                        '\n    cssz-dimension:refArea ?refArea ;'
+                        '\n    cssz-dimension:druh-duchodu ?pensionKind ;'
+                        '\n    cssz-measure:prumerna-vyse-duchodu-v-kc ?pension .'
+                        '\n  }'
+                        '\n }'],
+
+                   78: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/are-there-regions-with-women-older-than-men",
+                        'PREFIX cssz-dimension: <https://data.cssz.cz/ontology/dimension/>'
+                        '\n PREFIX cssz-measure:   <https://data.cssz.cz/ontology/measure/>'
+                        '\n PREFIX pension-kind:   <https://data.cssz.cz/resource/pension-kind/>'
+                        '\n PREFIX qb:             <http://purl.org/linked-data/cube#>'
+                        '\n PREFIX sdmx-code:      <http://purl.org/linked-data/sdmx/2009/code#>'
+                        '\n PREFIX skos:           <http://www.w3.org/2004/02/skos/core#>'
+                        '\n ASK'
+                        '\n WHERE {'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> {'
+                        '\n   ?pensionKind skos:exactMatch pension-kind:PK_old_age_total_without_SR .'
+                        '\n  }'
+                        '\n  GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
+                        '\n   [] cssz-dimension:pohlavi sdmx-code:sex-F ;'
+                        '\n    cssz-dimension:druh-duchodu ?pensionKind ;'
+                        '\n    cssz-dimension:refArea ?refArea ;'
+                        '\n    cssz-dimension:refPeriod ?refPeriod ;'
+                        '\n    cssz-measure:prumerny-vek ?averageAgeWomen .'
+                        '\n   [] cssz-dimension:pohlavi sdmx-code:sex-M ;'
+                        '\n    cssz-dimension:druh-duchodu ?pensionKind ;'
+                        '\n    cssz-dimension:refArea ?refArea ;'
+                        '\n    cssz-dimension:refPeriod ?refPeriod ;'
+                        '\n    cssz-measure:prumerny-vek ?averageAgeMen .'
+                        '\n   FILTER (?averageAgeWomen > ?averageAgeMen)'
+                        '\n  }'
                         '\n }']
                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
