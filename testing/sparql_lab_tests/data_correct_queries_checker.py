@@ -700,8 +700,8 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n WHERE {'
                         '\n  GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
                         '\n   <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> '
-                        'qb:structure ?dsd .'
-                        '\n   ?dsd qb:component ?component '
+                        'qb:structure ?dsd . '
+                        '\n   ?dsd qb:component ?component .'
                         '\n   ?component rdfs:label ?componentLabel .'
                         '\n   FILTER langMatches(lang(?componentLabel), "cs")'
                         '\n   OPTIONAL {'
@@ -772,16 +772,16 @@ test_cases_dict = {1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-d
                         '\n    SELECT DISTINCT ?term'
                         '\n    WHERE {'
                         '\n     GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> {'
-                        '\n      [] ?term [] '
+                        '\n      [] ?term [] .'
                         '\n     }'
                         '\n    }'
                         '\n   }'
-                        '\n  BIND (IRI(REPLACE(STR(?term), "^(.+)(#|\\/).+$", "$1")) AS ?vocabulary)'
+                        '\n'  r'BIND (IRI(REPLACE(STR(?term), "^(.+)(#|\\/).+$", "$1")) AS ?vocabulary)'
                         '\n }'
                         '\n GROUP BY ?vocabulary'
                         '\n ORDER BY DESC(?count)'],
 
-                   72: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-concepts"
+                   72: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-concepts",
                         'PREFIX skos: <http://www.w3.org/2004/02/skos/core#>'
                         '\n ASK'
                         '\n WHERE {'
