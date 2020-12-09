@@ -1,11 +1,13 @@
 import unittest
 
 from selenium import webdriver
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from data_correct_queries_checker import test_cases_dict
+from test_cases_data import test_cases_dict_correct_queries_checker
+from test_cases_data import test_cases_dict_wrong_queries_checker
 
 
 class CorrectQueriesChecker(unittest.TestCase):
@@ -19,7 +21,42 @@ class CorrectQueriesChecker(unittest.TestCase):
     def test_load_test_cases(self):
         global url
         global query
-        for test_case, url_and_query in test_cases_dict.items():
+        for test_case, url_and_query in test_cases_dict_correct_queries_checker.items():
+            with self.subTest(test_case=test_case, url_and_query=url_and_query):
+                url = url_and_query[0]
+                query = url_and_query[1]
+                self.driver.get(url)
+                WebDriverWait(self.driver, 60).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
+                editor = self.driver.find_element_by_css_selector('.CodeMirror  textarea')
+                editor.send_keys(Keys.CONTROL + "a")
+                editor.send_keys(Keys.DELETE)
+                editor.send_keys(query)
+                self.driver.find_element_by_xpath('//button[text()="Submit"]').click()
+                check_mark = self.driver.find_element_by_css_selector("i.fa.fa-check.correct")
+                assert check_mark.is_displayed()
+
+
+    def tearDown(self):
+        # time.sleep(60)
+        self.driver.close()
+
+
+CorrectQueriesChecker()
+
+
+class WrongQueriesChecker(unittest.TestCase):
+
+    def setUp(self):
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("excludeSwitches", ["enable-logging"])
+        self.driver = webdriver.Chrome(options=options, executable_path=r'C:/Users/mbajic/Documents/python/'
+                                                                        r'testing/sparql_lab_tests/chromedriver.exe')
+
+    def test_load_test_cases(self):
+        global url
+        global query
+        for test_case, url_and_query in test_cases_dict_wrong_queries_checker.items():
             with self.subTest(test_case=test_case, url_and_query=url_and_query):
                 url = url_and_query[0]
                 query = url_and_query[1]
@@ -32,15 +69,15 @@ class CorrectQueriesChecker(unittest.TestCase):
                 editor.send_keys(query)
                 self.driver.find_element_by_xpath('//button[text()="Submit"]').click()
                 self.driver.implicitly_wait(20)
-                checkmark = self.driver.find_element_by_xpath('/html/body/div/div[1]/div[1]/div/h2/i')
-                assert checkmark.is_displayed()
+                x_mark = self.driver.find_element_by_css_selector("i.fa.fa-times.incorrect")
+                assert x_mark.is_displayed()
 
     def tearDown(self):
         # time.sleep(60)
         self.driver.close()
 
 
-CorrectQueriesChecker()
+WrongQueriesChecker()
 
 
 class UiElementsChecker(unittest.TestCase):
