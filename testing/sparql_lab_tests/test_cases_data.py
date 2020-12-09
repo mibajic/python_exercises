@@ -412,6 +412,20 @@ test_cases_dict_correct_queries_checker = {
          '} \n'
          '} '],
 
+    45: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/evaluate/pension-kind-with-most-children",
+         'PREFIX pen-onto: <http://data.cssz.cz/ontology/pension-kinds/> \n'
+         'PREFIX skos:     <http://www.w3.org/2004/02/skos/core#> \n'
+         'SELECT ?pensionKind \n'
+         'WHERE { \n'
+         'GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { \n'
+         '?pensionKind skos:inScheme pen-onto:PensionKindScheme_2008 ;'
+         'skos:narrower ?child . \n'
+         '} \n'
+         '} \n'
+         'GROUP BY ?pensionKind \n'
+         'ORDER BY DESC(COUNT(?child)) \n'
+         'LIMIT 1'],
+
     46: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-without-distinct",
          'SELECT (COUNT(?class) AS ?count) \n'
          'WHERE { \n'
@@ -624,6 +638,20 @@ test_cases_dict_correct_queries_checker = {
          '} \n'
          '}'],
 
+    61: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-kind-with-most-descendants",
+         'PREFIX pen-onto: <http://data.cssz.cz/ontology/pension-kinds/> \n'
+         'PREFIX skos:     <http://www.w3.org/2004/02/skos/core#> \n'
+         'SELECT ?pensionKind \n'
+         'WHERE { \n'
+         'GRAPH <https://data.cssz.cz/resource/dataset/pomocne-ciselniky> { \n'
+         '?pensionKind skos:inScheme pen-onto:PensionKindScheme_2008 ; \n'
+         'skos:narrower+ ?descendant . \n'
+         '} \n '
+         '} \n'
+         'GROUP BY ?pensionKind \n'
+         'ORDER BY DESC(COUNT(DISTINCT ?descendant)) \n'
+         'LIMIT 1'],
+
     62: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/concepts-in-multiple-schemes",
          'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n'
          'CONSTRUCT { \n'
@@ -779,6 +807,44 @@ test_cases_dict_correct_queries_checker = {
          '} \n'
          'GROUP BY ?vocabulary \n'
          'ORDER BY DESC(?count)'],
+
+    70: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/component-properties-with-most-specific-classes"
+         'PREFIX qb:   <http://purl.org/linked-data/cube#> \n'
+         'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n'
+         'SELECT DISTINCT ?componentProperty ?class \n'
+         'FROM <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> \n'
+         'FROM <http://purl.org/linked-data/cube> \n'
+         'WHERE { \n'
+         '?property rdfs:subPropertyOf* qb:componentProperty  \n'
+         '<https://data.cssz.cz/resource/data-structure-definition/duchodci-v-cr-krajich-okresech> qb:component [ \n'
+         '?property ?componentProperty \n'
+         '] . \n'
+         'OPTIONAL { \n'
+         '?componentProperty a ?class . \n'
+         'FILTER NOT EXISTS { \n'
+         '[] rdfs:subClassOf ?class . \n'
+         '} \n'
+         '} \n'
+         '}'],
+
+    71: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-component-properties-with-classes",
+         'PREFIX qb:   <http://purl.org/linked-data/cube#> \n'
+         'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n'
+         'SELECT DISTINCT ?componentProperty ?class \n'
+         'WHERE { \n'
+         'GRAPH <http://purl.org/linked-data/cube> { \n'
+         '?property rdfs:subPropertyOf qb:componentProperty . \n'
+         '} \n'
+         'GRAPH <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> { \n'
+         '<https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> qb:structure ?dsd . \n'
+         '?dsd qb:component [ \n'
+         '?property ?componentProperty \n'
+         '] . \n'
+         'OPTIONAL { \n'
+         '?componentProperty a ?class . \n'
+         '} \n'
+         '} \n'
+         '}'],
 
     72: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-concepts",
          'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n'
