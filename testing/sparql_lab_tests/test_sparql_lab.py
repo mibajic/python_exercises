@@ -36,10 +36,9 @@ class CorrectQueriesChecker(unittest.TestCase):
                 check_mark = self.driver.find_element_by_css_selector("i.fa.fa-check.correct")
                 assert check_mark.is_displayed()
 
-
     def tearDown(self):
-        # time.sleep(60)
-        self.driver.close()
+        time.sleep(60)
+    #   self.driver.close()
 
 
 CorrectQueriesChecker()
