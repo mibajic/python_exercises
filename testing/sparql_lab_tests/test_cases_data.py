@@ -412,7 +412,7 @@ test_cases_dict_correct_queries_checker = {
          '} \n'
          '} '],
 
-    45: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/evaluate/pension-kind-with-most-children",
+    45: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-kind-with-most-children",
          'PREFIX pen-onto: <http://data.cssz.cz/ontology/pension-kinds/> \n'
          'PREFIX skos:     <http://www.w3.org/2004/02/skos/core#> \n'
          'SELECT ?pensionKind \n'
@@ -808,14 +808,14 @@ test_cases_dict_correct_queries_checker = {
          'GROUP BY ?vocabulary \n'
          'ORDER BY DESC(?count)'],
 
-    70: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/component-properties-with-most-specific-classes"
+    70: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/component-properties-with-most-specific-classes",
          'PREFIX qb:   <http://purl.org/linked-data/cube#> \n'
          'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n'
          'SELECT DISTINCT ?componentProperty ?class \n'
          'FROM <https://data.cssz.cz/resource/dataset/duchodci-v-cr-krajich-okresech> \n'
          'FROM <http://purl.org/linked-data/cube> \n'
          'WHERE { \n'
-         '?property rdfs:subPropertyOf* qb:componentProperty  \n'
+         '?property rdfs:subPropertyOf* qb:componentProperty . \n'
          '<https://data.cssz.cz/resource/data-structure-definition/duchodci-v-cr-krajich-okresech> qb:component [ \n'
          '?property ?componentProperty \n'
          '] . \n'

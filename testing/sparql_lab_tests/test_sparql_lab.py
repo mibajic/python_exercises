@@ -37,8 +37,8 @@ class CorrectQueriesChecker(unittest.TestCase):
                 assert check_mark.is_displayed()
 
     def tearDown(self):
-        time.sleep(60)
-    #   self.driver.close()
+        # time.sleep(60)
+        self.driver.close()
 
 
 CorrectQueriesChecker()
