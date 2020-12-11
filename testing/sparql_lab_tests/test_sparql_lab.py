@@ -90,17 +90,19 @@ class UiElementsChecker(unittest.TestCase):
     def test_page_running(self):
         driver = self.driver
         driver.get("https://doc.lmcloud.vse.cz/sparqlab")
-        assert 'Exercises by difficulty' in driver.find_element_by_tag_name("h1").text
+        with self.subTest():
+            assert 'Exercises by difficulty' in driver.find_element_by_tag_name("h1").text
 
     def test_navigation_bar(self):
         driver = self.driver
         driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         nav_bar = driver.find_element_by_id("collapsing-navbar")
-        assert "SPARQLabβ" in nav_bar.text
-        assert "Exercises" in nav_bar.text
-        assert "SPARQL endpoint" in nav_bar.text
-        assert "Data" in nav_bar.text
-        assert "About" in nav_bar.text
+        with self.subTest():
+            assert "SPARQLabβ" in nav_bar.text
+            assert "Exercises" in nav_bar.text
+            assert "SPARQL endpoint" in nav_bar.text
+            assert "Data" in nav_bar.text
+            assert "About" in nav_bar.text
 
     def test_search_function(self):
         driver = self.driver
@@ -109,21 +111,24 @@ class UiElementsChecker(unittest.TestCase):
         search.click()
         search.send_keys("datatype")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/form/div/div/div/ul/li/mark').click()
-        assert "Datové typy" in driver.find_element_by_xpath('/html/body/div/ul').text
+        with self.subTest():
+            assert "Datové typy" in driver.find_element_by_xpath('/html/body/div/ul').text
 
     def test_about_option(self):
         driver = self.driver
         driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[4]/a').click()
-        assert "SPARQLab serves for exercising the SPARQL query language." in driver.find_element_by_xpath(
-            "/html/body/div/div/div/p[1]").text
+        with self.subTest():
+            assert "SPARQLab serves for exercising the SPARQL query language." in driver.find_element_by_xpath(
+                "/html/body/div/div/div/p[1]").text
 
     def test_exercises_menu(self):
         driver = self.driver
         driver.get("https://doc.lmcloud.vse.cz/sparqlab")
         driver.find_element_by_xpath('//*[@id="collapsing-navbar"]/ul/li[1]/a').click()
-        assert "By language constructs" in driver.find_element_by_xpath(
-            '//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]').text
+        with self.subTest():
+            assert "By language constructs" in driver.find_element_by_xpath(
+                '//*[@id="collapsing-navbar"]/ul/li[1]/div/a[3]').text
 
     def tearDown(self):
         # time.sleep(60)
