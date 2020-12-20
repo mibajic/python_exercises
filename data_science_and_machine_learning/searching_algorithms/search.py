@@ -162,7 +162,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
 
     queue = util.PriorityQueue()
     visited_nodes = []
-    path = []
     start_state = problem.getStartState()
     queue.push((start_state, [], 0), 0)
 
