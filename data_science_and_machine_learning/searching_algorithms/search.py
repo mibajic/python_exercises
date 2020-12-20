@@ -154,16 +154,14 @@ def uniformCostSearch(problem):
         # when goal state is reached or start state is goal state, then the function returns full path to the goal state
         if goal_state is True or start_state == goal_state:
             return path
-        while state not in visited_nodes:
+        elif state not in visited_nodes:
             visited_nodes.append(state)
             child_nodes = problem.getSuccessors(state)
             for next_node in child_nodes:
                 node, direction, number_of_steps = next_node
                 next_step = path + [direction]
-                cost = (path + next_step)
-                queue.push((node, next_step), cost)
-
-
+                priority = problem.getCostOfActions(next_step)
+                queue.push((node, next_step), priority)
 
 def nullHeuristic(state, problem=None):
     """
