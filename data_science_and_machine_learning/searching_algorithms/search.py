@@ -61,7 +61,6 @@ class SearchProblem:
         """
         util.raiseNotDefined()
 
-
 def tinyMazeSearch(problem):
     """
     Returns a sequence of moves that solves tinyMaze.  For any other maze, the
@@ -96,7 +95,7 @@ def depthFirstSearch(problem):
     start_state = problem.getStartState()
     stack.push((start_state, path))
 
-    # the function runs while stack is empty
+    # the function runs while stack is not empty
     while stack:
         state, path = stack.pop()
         goal_state = problem.isGoalState(state)
@@ -122,7 +121,7 @@ def breadthFirstSearch(problem):
     start_state = problem.getStartState()
     queue.push((start_state, path))
 
-    # the function runs while queue is empty
+    # the function runs while queue is not empty
     while queue:
         state, path = queue.pop()
         goal_state = problem.isGoalState(state)
@@ -141,7 +140,29 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    queue = util.PriorityQueue()
+    visited_nodes = []
+    path = []
+    start_state = problem.getStartState()
+    queue.push((start_state, path), 0)
+
+    # the function runs while queue is not empty
+    while queue:
+        state, path = queue.pop()
+        goal_state = problem.isGoalState(state)
+        # when goal state is reached or start state is goal state, then the function returns full path to the goal state
+        if goal_state is True or start_state == goal_state:
+            return path
+        while state not in visited_nodes:
+            visited_nodes.append(state)
+            child_nodes = problem.getSuccessors(state)
+            for next_node in child_nodes:
+                node, direction, number_of_steps = next_node
+                next_step = path + [direction]
+                cost = (path + next_step)
+                queue.push((node, next_step), cost)
+
 
 
 def nullHeuristic(state, problem=None):
