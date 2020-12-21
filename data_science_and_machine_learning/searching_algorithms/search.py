@@ -80,23 +80,20 @@ def depthFirstSearch(problem):
     stack = util.Stack()
     visited_nodes = []
     path = []
-    start_state = problem.getStartState()
-    stack.push((start_state, path))
+    stack.push((problem.getStartState(), path))
 
     # the function runs while stack is not empty
     while stack:
         state, path = stack.pop()
-        goal_state = problem.isGoalState(state)
         # when goal state is reached or start state is goal state, then the function returns full path to the goal state
-        if goal_state is True or start_state == goal_state:
+        if problem.isGoalState(state) is True or problem.getStartState() == problem.isGoalState(state):
             return path
         while state not in visited_nodes:
             visited_nodes.append(state)
-            child_nodes = problem.getSuccessors(state)
-            for next_node in child_nodes:
-                node, direction, number_of_steps = next_node
-                next_step = path + [direction]
-                stack.push((node, next_step))
+            for node, direction, number_of_steps in problem.getSuccessors(state):
+                stack.push((node, path + [direction]))
+
+
 
 
 def breadthFirstSearch(problem):
