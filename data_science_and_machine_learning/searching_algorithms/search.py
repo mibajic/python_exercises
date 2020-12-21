@@ -122,20 +122,17 @@ def uniformCostSearch(problem):
     queue = util.PriorityQueue()
     visited_nodes = []
     path = []
-    start_state = problem.getStartState()
-    queue.push((start_state, path), 0)
+    queue.push((problem.getStartState(), path), 0)
 
     # the function runs while queue is not empty
     while queue:
         state, path = queue.pop()
         # when goal state is reached or start state is goal state, then the function returns full path to the goal state
-        if problem.isGoalState(state) is True or start_state == problem.isGoalState(state):
+        if problem.isGoalState(state) is True or problem.getStartState() == problem.isGoalState(state):
             return path
         elif state not in visited_nodes:
             visited_nodes.append(state)
-            child_nodes = problem.getSuccessors(state)
-            for next_node in child_nodes:
-                node, direction, number_of_steps = next_node
+            for node, direction, number_of_steps in problem.getSuccessors(state):
                 next_step = path + [direction]
                 priority = problem.getCostOfActions(next_step)
                 queue.push((node, next_step), priority)
