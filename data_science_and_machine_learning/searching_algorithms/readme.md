@@ -1,6 +1,7 @@
 # Pac-Man
 > The Pac-Man projects were developed for UC Berkeley's introductory artificial intelligence course. Detailed project overview from its developers can be found [here](http://ai.berkeley.edu/project_overview.html).
- 
+
+## Introduction 
 Pac-Man is a game, where the main character Pac-Man is trying to navigate through an enclosed maze with the aim of eating all dots placed in the maze while avoiding four coloured ghosts. As a part of my semester work on the Artificial Intelligence 1 course, I've implemented the following navigation algorithms:
 * Depth First Search Algorithm
 * Breadth First Search Algorithm
