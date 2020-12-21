@@ -150,20 +150,17 @@ def aStarSearch(problem, heuristic=nullHeuristic):
 
     queue = util.PriorityQueue()
     visited_nodes = []
-    start_state = problem.getStartState()
-    queue.push((start_state, [], 0), 0)
+    queue.push((problem.getStartState(), [], 0), 0)
 
     # the function runs while queue is not empty
     while queue:
         state, path, previous_cost = queue.pop()
-        goal_state = problem.isGoalState(state)
         # when goal state is reached or start state is goal state, then the function returns full path to the goal state
-        if goal_state is True or start_state == goal_state:
+        if problem.isGoalState(state) is True or problem.getStartState() == problem.isGoalState(state):
             return path
         while state not in visited_nodes:
             visited_nodes.append(state)
-            child_nodes = problem.getSuccessors(state)
-            for next_node, direction, cost in child_nodes:
+            for next_node, direction, cost in problem.getSuccessors(state):
                 next_step = path + [direction]
                 cost_of_node = previous_cost + cost
                 heuristic_cost = cost_of_node + heuristic(next_node, problem)
