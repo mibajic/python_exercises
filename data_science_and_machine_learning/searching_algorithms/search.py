@@ -19,6 +19,7 @@ Pacman agents (in searchAgents.py).
 
 import util
 
+
 class SearchProblem:
     """
     This class outlines the structure of a search problem, but doesn't implement
@@ -61,6 +62,7 @@ class SearchProblem:
         """
         util.raiseNotDefined()
 
+
 def tinyMazeSearch(problem):
     """
     Returns a sequence of moves that solves tinyMaze.  For any other maze, the
@@ -73,9 +75,7 @@ def tinyMazeSearch(problem):
 
 
 def depthFirstSearch(problem):
-    """
-    Search the deepest nodes in the search tree first.
-    """
+    """Search the deepest nodes in the search tree first."""
 
     stack = util.Stack()
     visited_nodes = []
@@ -92,8 +92,6 @@ def depthFirstSearch(problem):
             visited_nodes.append(state)
             for node, direction, number_of_steps in problem.getSuccessors(state):
                 stack.push((node, path + [direction]))
-
-
 
 
 def breadthFirstSearch(problem):
@@ -136,6 +134,7 @@ def uniformCostSearch(problem):
                 next_step = path + [direction]
                 priority = problem.getCostOfActions(next_step)
                 queue.push((node, next_step), priority)
+
 
 def nullHeuristic(state, problem=None):
     """
