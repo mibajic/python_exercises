@@ -1247,256 +1247,164 @@ test_cases_dict_correct_queries_checker = {
          'ORDER BY DESC(?refPeriod)']
 }
 
-incorrect_query = 'SELECT * ' \
-             'WHERE { \n' \
-             '[] ?p [] . \n' \
-             '} \n' \
-             'LIMIT 1 '
-
 test_cases_dict_wrong_queries_checker = {
-    1: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-data",
-        incorrect_query],
+    1: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-data",
 
-    2: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/one-triple",
-        incorrect_query],
+    2: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/one-triple",
 
-    3: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-named-graphs",
-        incorrect_query],
+    3: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/some-named-graphs",
 
-    4: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes",
-        incorrect_query],
+    4: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes",
 
-    5: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-triples",
-        incorrect_query],
+    5: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-triples",
 
-    6: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties",
-        incorrect_query],
+    6: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties",
 
-    7: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-orphan-pension",
-        incorrect_query],
+    7: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-orphan-pension",
 
-    8: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/one-quad",
-        incorrect_query],
+    8: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/one-quad",
 
-    9: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/named-graphs",
-        incorrect_query],
+    9: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/named-graphs",
 
-    10: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram",
-         incorrect_query],
+    10: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram",
 
-    11: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram",
-         incorrect_query],
+    11: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram",
 
-    12: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-equals-named-graph",
-         incorrect_query],
+    12: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-equals-named-graph",
 
-    13: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/understanding-from",
-         incorrect_query],
+    13: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/understanding-from",
 
-    14: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-dimensions",
-         incorrect_query],
+    14: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/describe-dimensions",
 
-    15: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/graph-sizes",
-         incorrect_query],
+    15: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/graph-sizes",
 
-    16: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/understanding-graph",
-         incorrect_query],
+    16: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/understanding-graph",
 
-    17: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/understanding-from-named",
-         incorrect_query],
+    17: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/understanding-from-named",
 
-    18: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes",
-         incorrect_query],
+    18: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes",
 
-    19: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-code-lists",
-         incorrect_query],
+    19: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-code-lists",
 
-    20: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/disjoint-concept-and-concept-scheme",
-         incorrect_query],
+    20: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/disjoint-concept-and-concept-scheme",
 
-    21: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-code-lists",
-         incorrect_query],
+    21: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-code-lists",
 
-    22: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-data",
-         incorrect_query],
+    22: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-data",
 
-    23: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/most-common-class-data",
-         incorrect_query],
+    23: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/most-common-class-data",
 
-    24: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-metadata",
-         incorrect_query],
+    24: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/classes-histogram-metadata",
 
-    25: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-districts",
-         incorrect_query],
+    25: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-districts",
 
-    26: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/datasets",
-         incorrect_query],
+    26: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/datasets",
 
-    27: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-data",
-         incorrect_query],
+    27: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-data",
 
-    28: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/reflexive-exact-match",
-         incorrect_query],
+    28: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/reflexive-exact-match",
 
-    29: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-metadata",
-         incorrect_query],
+    29: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-histogram-metadata",
 
-    30: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/datatypes",
-         incorrect_query],
+    30: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/datatypes",
 
-    31: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-datasets",
-         incorrect_query],
+    31: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-datasets",
 
-    32: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-qb-observation-data",
-         incorrect_query],
+    32: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/properties-qb-observation-data",
 
-    33: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/component-property-subproperties",
-         incorrect_query],
+    33: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/component-property-subproperties",
 
-    34: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/data-structure-definition",
-         incorrect_query],
+    34: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/data-structure-definition",
 
-    35: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/czech-county-labels",
-         incorrect_query],
+    35: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/czech-county-labels",
 
-    36: [
-        "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/collection-disjoint-with-concept-and-concept"
-        "-scheme",
-        incorrect_query],
+    36: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/collection-disjoint-with-concept-and-concept-scheme",
 
-    37: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/label-without-language",
-         incorrect_query],
+    37: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/label-without-language",
 
-    38: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/empty-labels",
-         incorrect_query],
+    38: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/empty-labels",
 
-    39: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pairwise-disjoint-skos-match-properties",
-         incorrect_query],
+    39: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pairwise-disjoint-skos-match-properties",
 
-    40: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/old-age-pension-kinds",
-         incorrect_query],
+    40: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/old-age-pension-kinds",
 
-    41: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-kind-schemes",
-         incorrect_query],
+    41: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-kind-schemes",
 
-    42: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-measures",
-         incorrect_query],
+    42: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-measures",
 
-    43: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-attributes",
-         incorrect_query],
+    43: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-attributes",
 
-    44: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-dimensions",
-         incorrect_query],
+    44: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-dimensions",
 
-    46: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-without-distinct",
-         incorrect_query],
+    46: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-without-distinct",
 
-    47: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/"
-         "overlapping-associative-and-hierarchical-relations",
-         incorrect_query],
+    47: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/overlapping-associative-and-hierarchical-relations",
 
-    48: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/object-property-path",
-         incorrect_query],
+    48: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/object-property-path",
 
-    49: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/valueless-associative-relations",
-         incorrect_query],
+    49: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/valueless-associative-relations",
 
-    50: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/cyclic-hierchical-relations",
-         incorrect_query],
+    50: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/cyclic-hierchical-relations",
 
-    51: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/omitted-top-concepts",
-         incorrect_query],
+    51: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/omitted-top-concepts",
 
-    52: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ambiguous-notation-references",
-         incorrect_query],
+    52: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ambiguous-notation-references",
 
-    53: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-pension-kinds",
-         incorrect_query],
+    53: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-pension-kinds",
 
-    54: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-with-reduced",
-         incorrect_query],
+    54: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/count-distinct-classes-with-reduced",
 
-    55: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/unprintable-characters-in-labels",
-         incorrect_query],
+    55: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/unprintable-characters-in-labels",
 
-    56: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/path-between-pension-kinds",
-         incorrect_query],
+    56: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/path-between-pension-kinds",
 
-    57: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/multiple-pref-labels-per-language",
-         incorrect_query],
+    57: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/multiple-pref-labels-per-language",
 
-    58: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/highest-pension",
-         incorrect_query],
+    58: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/highest-pension",
 
-    59: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ref-area-classes",
-         incorrect_query],
+    59: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ref-area-classes",
 
-    60: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pairwise-disjoint-skos-label-properties",
-         incorrect_query],
+    60: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pairwise-disjoint-skos-label-properties",
 
-    62: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/concepts-in-multiple-schemes",
-         incorrect_query],
+    62: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/concepts-in-multiple-schemes",
 
-    63: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dsd-has-normal-form",
-         incorrect_query],
+    63: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dsd-has-normal-form",
 
-    64: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/is-pension-kinds-2008-polyhierarchical",
-         incorrect_query],
+    64: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/is-pension-kinds-2008-polyhierarchical",
 
-    65: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/hierarchical-code-lists",
-         incorrect_query],
+    65: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/hierarchical-code-lists",
 
-    66: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-component-labels-czech",
-         incorrect_query],
+    66: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dataset-component-labels-czech",
 
-    67: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/unidirectionally-related-concepts",
-         incorrect_query],
+    67: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/unidirectionally-related-concepts",
 
-    68: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/top-concept-has-no-broader-concept",
-         incorrect_query],
+    68: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/top-concept-has-no-broader-concept",
 
-    69: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/vocabularies",
-         incorrect_query],
+    69: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/vocabularies",
 
-    72: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-concepts",
-         incorrect_query],
+    72: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-concepts",
 
-    73: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/is-multimeasure-dataset",
-         incorrect_query],
+    73: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/is-multimeasure-dataset",
 
-    74: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ambiguous-notation-references-construct",
-         incorrect_query],
+    74: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/ambiguous-notation-references-construct",
 
-    75: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/greatest-range-of-pensions-between-areas",
-         incorrect_query],
+    75: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/greatest-range-of-pensions-between-areas",
 
-    76: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-count-over-time",
-         incorrect_query],
+    76: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/orphan-count-over-time",
 
-    77: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/average-pension-per-region",
-         incorrect_query],
+    77: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/average-pension-per-region",
 
-    78: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/are-there-regions-with-women-older-than-men",
-         incorrect_query],
+    78: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/are-there-regions-with-women-older-than-men",
 
-    79: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-gap-in-regions-over-time",
-         incorrect_query],
+    79: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/pension-gap-in-regions-over-time",
 
-    80: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dsd-components",
-         incorrect_query],
+    80: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/dsd-components",
 
+    82: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/total-pension-cost-for-2015-per-prague-district",
 
-    82: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/"
-         "total-pension-cost-for-2015-per-prague-district",
-         incorrect_query],
+    83: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/poorest-prague-districts-over-time",
 
+    84: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/greatest-increase-in-pensions-over-5-years",
 
-    83: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/poorest-prague-districts-over-time",
-         incorrect_query],
-
-    84: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/greatest-increase-in-pensions-over-5-years",
-         incorrect_query],
-
-    85: ["https://doc.lmcloud.vse.cz/sparqlab/exercise/show/average-age-per-disability-level-and-year",
-         incorrect_query],
+    85: "https://doc.lmcloud.vse.cz/sparqlab/exercise/show/average-age-per-disability-level-and-year"
 }
