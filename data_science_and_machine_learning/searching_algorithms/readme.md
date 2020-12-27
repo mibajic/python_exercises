@@ -40,9 +40,9 @@ python pacman.py -l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattan
 ```
 
 ## Screenshots
+![image](https://user-images.githubusercontent.com/38294198/103171000-f0d0e800-4848-11eb-93e4-9e208615a51b.png)
 ![Pac-Mac navigating through the maze in search of food](https://user-images.githubusercontent.com/38294198/102821744-e55c6780-43d7-11eb-8d3c-d7c8e6b30ac8.png)
 ![image](https://user-images.githubusercontent.com/38294198/103170956-a3547b00-4848-11eb-840c-d3eb9655da45.png)
-![image](https://user-images.githubusercontent.com/38294198/103171000-f0d0e800-4848-11eb-93e4-9e208615a51b.png)
 
 
 
