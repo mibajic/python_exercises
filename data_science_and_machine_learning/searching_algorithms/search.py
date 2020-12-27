@@ -150,7 +150,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     queue = util.PriorityQueue()
     visited_nodes = []
     path = []
-    queue.push((problem.getStartState(), path), 0)
+    queue.push((problem.getStartState(), [], 0), 0)
 
     # the function runs while queue is not empty
     while queue:
