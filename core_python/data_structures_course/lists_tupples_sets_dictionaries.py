@@ -156,8 +156,97 @@
 # print(y)
 
 
+# x = ()
+# y = (1, 2, 3)
+# # parenthesis are optional
+# z = 1, 2, 3
+# a = 2,
+#
+# list1 = [2, 4, 6]
+# j = tuple(list1)
 
+# y = ([1, 2], 3)
+# # take the 0th item and delete the first item in it (number 2)
+# # if you have a list in a tupple, you can change it
+# del(y[0][1])
+#
+# # merge two tupples into one
+# y += (4, )
+# print(y)
 
+# sets store non-duplicate items
+# fast access vs lists
+# math set ops (union, intersect)
+# unordered
+
+# few ways to create a new set
+# x = {3, 5, 3, 5}
+# print(x)
+#
+# y = set()
+#
+# list1 = [2, 3, 4]
+# z = set(list1)
+#
+# x = {3, 8, 5}
+# x.add(3)
+# x.remove(4)
+# print(len(x))
+# print(5 in x)
+# # pop random item from set x, returns a random item and set
+# print(x.pop(), x)
+# # delete all items
+# x.clear()
+
+# s1 = {1, 2, 3}
+# s2 = {3, 4, 5}
+#
+# # intersection (AND): set1 & set2
+# print(s1 & s2)
+# # union(OR): set1 | set2
+# print(s1 | s2)
+# # symmetric difference (XOR):
+# # set1 ^ set2 difference (in set1 but not in set2): set1 - set2
+# print(s1 ^ s2)
+# # subset (set2 contains set1): set1 <= set2
+# print(s1 <= s2)
+# # superset (set1 contains set2): set1 >= set2
+# print(s1 >= s2)
+
+# # dictionary
+# # in Java HashMap, associative array
+# # unordered
+x = {'pork': 25.3, 'beef': 33.8, 'chicken': 22.7}
+# # passing tupples to dictionary
+# y = dict([('pork', 25.3), ('beef', 33.8), ('chicken', 22.7)])
+# z = dict(pork=25.3, beef=33.8, chicken=22.7)
+
+# # add or update
+# x['shrimp'] = 38.2
+# del(x['shrimp'])
+# print(len(x))
+# # delete all items
+# x.clear()
+# # delete dict x
+# del(x)
+
+# y = {'pork': 25.3, 'beef': 33.8, 'chicken': 22.7}
+# print(y.keys())
+# print(y.values())
+# print(y.items())
+#
+# # check membershp in y_keys (only keys, not values)
+# print('beef' in y)
+#
+# # check membership in y_values
+# print('clams' in y.values())
+#
+# # iterating a dict
+# for key in y:
+#     print(key, y[key])
+#
+# for k, v in y.items():
+#     print(k, v)
 
 
 
