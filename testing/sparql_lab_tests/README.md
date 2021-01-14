@@ -16,7 +16,7 @@ Cíle tohoto semestrálního projektu jsou:
 pip install selenium
 pip install unittest
 ```
-Testy je možné spouštět promocí příklazu:
+Testy je možné spouštět pomocí příkazu:
 ```
 python test_sparql_lab.py
 ```
