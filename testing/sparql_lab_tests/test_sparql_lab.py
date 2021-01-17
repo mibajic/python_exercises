@@ -60,7 +60,7 @@ class WrongQueriesChecker(unittest.TestCase):
                                   'WHERE { \n ' \
                                   '?s ?p ?o . \n' \
                                   '} \n' \
-                                  'LIMIT 1 '
+                                  'LIMIT 2 '
                 self.driver.get(url)
                 WebDriverWait(self.driver, 60).until(
                     EC.presence_of_element_located((By.CLASS_NAME, "CodeMirror-scroll")))
