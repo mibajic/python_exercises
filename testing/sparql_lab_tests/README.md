@@ -22,4 +22,4 @@ Testy je možné spouštět pomocí příkazu:
 ```
 python test_sparql_lab.py
 ```
-nebo přímo v Python editoru (testováno v PyCharm).
+nebo přímo v IDE.
