@@ -1,11 +1,13 @@
-# SPARQLab ![image](https://user-images.githubusercontent.com/38294198/104660941-d5c6fa80-56c7-11eb-8256-13d54914d764.png)
-## O aplikaci 
-Aplikace [SPARQLab](https://doc.lmcloud.vse.cz/sparqlab/) byla vyvinuta Katedrou informačního a znalostního inženýrství na Vysoké škole ekonomické v Praze za účelem poskytnout studentům interaktivní nástroj k procvičování dotazovacího jazyka SPARQL.
+# Automatizované testy funkčnosti aplikace SPARQLab ![image](https://user-images.githubusercontent.com/38294198/104660941-d5c6fa80-56c7-11eb-8256-13d54914d764.png)
+Testovací scénáře byly vytvořeny v rámci semestrálního projektu předmětu 4IZ440 - Propojená data. 
 
-Cíle tohoto semestrálního projektu jsou: 
+Cílem práce je: 
 * procvičit SPARQL manuálním testováním a sběrem dotazů při psaní testovacích scénářů 
 * otestovat funkčnost aplikace SPARQLab
 * poskytnout katedře nástroj k automatickému testování funkčnosti
+
+## O aplikaci SPARQLab ![image](https://user-images.githubusercontent.com/38294198/104661060-0eff6a80-56c8-11eb-892c-f8f98b7f987b.png)
+Aplikace [SPARQLab](https://doc.lmcloud.vse.cz/sparqlab/) byla vyvinuta Katedrou informačního a znalostního inženýrství na Vysoké škole ekonomické v Praze za účelem poskytnout studentům interaktivní nástroj k procvičování dotazovacího jazyka SPARQL.
 
 
 ## Návod ke spouštění testů ![image](https://user-images.githubusercontent.com/38294198/104661060-0eff6a80-56c8-11eb-892c-f8f98b7f987b.png)
